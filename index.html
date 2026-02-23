@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Plot | XM Zheng's Digital Garden</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="portal">
+        <canvas id="bg-canvas"></canvas>
+
+        <header class="center">
+            <h1>- The Plot -</h1>
+            <h2>XM Zheng's Digital Garden</h2>
+            <!-- <p>A collection of growing ideas & projects</p> -->
+        </header>
+
+        <div class="ring">
+            <!-- 只需 class="node"，JS 自动计算圆形位置 -->
+            <!-- footer 也在 ring 里，JS 统一计算位置，手机端 CSS 会把它放到最底部 -->
+            <a href="https://zhengximing.com/" class="node">
+                <span class="badge">🌱 Seedling</span>
+                <h3>About Myself</h3>
+            </a>
+            <div class="footer">
+                <!-- <h4>Backlinks</h4> -->
+                <!-- <nav>
+                    <a href="#">Mail</a>
+                    <a href="#">GitHub</a>
+                    <a href="#">BiliBili</a>
+                </nav> -->
+                <h4>© 2025-2026 XM Zheng</h4>
+            </div>
+            <a href="https://github.com/simonzxm" class="node">
+                <span class="badge">📈 Sprouting</span>
+                <h3>My GitHub</h3>
+            </a>
+            <a href="https://blog.xmzheng.cn/" class="node">
+                <span class="badge">🌸 Seasonal Bloom</span>
+                <h3>Blogs & Essays</h3>
+            </a>
+            <a href="https://status.nju.at/" class="node">
+                <span class="badge">🌲 Evergreen</span>
+                <h3>Server Status</h3>
+            </a>
+        </div>
+    </div>
+
+    <script src="portal.js"></script>
+    <script src="particle.js"></script>
+</body>
+</html>

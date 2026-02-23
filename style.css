@@ -1,0 +1,200 @@
+/* ===== Variables ===== */
+:root {
+    --bg: #f7f9f2;
+    --accent: #7da88a;
+    --text: #2c3e50;
+    --glass: rgba(255, 255, 255, 0.72);
+    --glass-border: rgba(255, 255, 255, 0.85);
+    --shadow: rgba(0, 0, 0, 0.05);
+    --shadow-hover: rgba(125, 168, 138, 0.22);
+}
+
+/* ===== Reset ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Noto Serif SC', serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+/* ===== Portal wrapper ===== */
+.portal {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #fff 0%, var(--bg) 100%);
+}
+
+/* ===== Background blobs ===== */
+.blob {
+    position: absolute;
+    background: var(--accent);
+    opacity: .1;
+    filter: blur(50px);
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    z-index: 0;
+    pointer-events: none;
+}
+.blob-1 { width: 320px; height: 320px; top: -60px; left: -60px; }
+.blob-2 { width: 260px; height: 260px; bottom: -60px; right: -60px; }
+
+/* ===== Center header ===== */
+.center {
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 5;
+    pointer-events: none;
+    user-select: none;
+}
+.center h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.4rem;
+    color: var(--accent);
+    letter-spacing: -1px;
+}
+.center h2 {
+    font-size: 1.4rem;
+    font-weight: 300;
+    margin-top: .4em;
+}
+.center p {
+    font-style: italic;
+    opacity: .55;
+    margin-top: .3em;
+}
+
+/* ===== Ring container (holds nodes) ===== */
+.ring {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* ===== Node cards ===== */
+.node {
+    position: absolute;
+    pointer-events: auto;
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 20px 30px;
+    border-radius: 18px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 10px 30px var(--shadow);
+    border: 1px solid var(--glass-border);
+    transition: transform .35s cubic-bezier(.175,.885,.32,1.275),
+                box-shadow .35s ease,
+                border-color .35s ease;
+    white-space: nowrap;
+}
+.node:hover {
+    transform: scale(1.06) translateY(-4px) !important;
+    box-shadow: 0 16px 44px var(--shadow-hover);
+    border-color: var(--accent);
+}
+.node h3 {
+    margin: 8px 0 0;
+    font-size: 1.1rem;
+}
+.node .badge {
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+}
+
+/* ===== Footer (backlinks) — positioned on ring like nodes ===== */
+.footer {
+    position: absolute;
+    pointer-events: auto;
+    text-align: center;
+    font-size: .85rem;
+    z-index: 10;
+    white-space: nowrap;
+}
+.footer h4 {
+    opacity: .6;
+    margin-bottom: 6px;
+    font-weight: 400;
+}
+.footer nav a {
+    color: var(--accent);
+    text-decoration: none;
+    margin: 0 8px;
+    transition: opacity .2s;
+}
+.footer nav a:hover { opacity: .65; }
+
+/* ===== Mobile: vertical stack ===== */
+@media (max-width: 768px) {
+    body { overflow-x: hidden; overflow-y: auto; }
+
+    .portal {
+        height: auto;
+        min-height: 100vh;
+        flex-direction: column;
+        padding: 60px 16px 80px;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .blob { display: none; }
+
+    .center {
+        position: relative;
+        top: auto; left: auto;
+        transform: none;
+        margin-bottom: 36px;
+    }
+    .center h1 { font-size: 2.4rem; }
+
+    .ring {
+        position: relative;
+        display: grid;
+        /* Auto-fit: 1 column when narrow, 2 columns when there's room */
+        grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+        gap: 16px;
+        width: 100%;
+        pointer-events: auto;
+    }
+
+    .node {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        width: 100%;
+        white-space: normal;
+        order: 0;
+    }
+
+    .footer {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        grid-column: 1 / -1;   /* span full width at the bottom */
+        margin-top: 12px;
+        white-space: normal;
+        order: 9999;           /* always last regardless of DOM order */
+    }
+}
+
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
